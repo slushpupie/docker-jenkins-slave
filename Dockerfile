@@ -17,7 +17,7 @@ RUN apt-get install -y openjdk-7-jdk
 RUN apt-get install -y pylint
 
 # Add user jenkins to the image
-RUN adduser --quiet jenkins
+RUN useradd -m jenkins
 # Set password for the jenkins user (you may want to alter this).
 RUN echo "jenkins:jenkins" | chpasswd
 # Set public key for the jenkins user to use
