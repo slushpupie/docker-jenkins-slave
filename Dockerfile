@@ -2,7 +2,7 @@ FROM centos:centos6
 MAINTAINER Jay Kline <jay@slushpupie.com>
 
 # Make sure the package repository is up to date.
-RUN yum install -y openssh-server java-1.8.0-openjdk git curl rpm-build rpmdevtools
+RUN yum install -y openssh-server java-1.8.0-openjdk git curl rpm-build rpmdevtools ; yum clean all
 
 # Configure SSH server
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
@@ -20,8 +20,8 @@ RUN echo "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwB
 # Install Docker
 RUN curl -sSL https://get.docker.com/ | sh
 
-# Clean up
-RUN rm -rf /var/lib/apt/lists/*
+RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_ecdsa_key && \
+    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key 
 
 # Standard SSH port
 EXPOSE 22
