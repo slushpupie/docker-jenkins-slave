@@ -1,8 +1,8 @@
-FROM ubuntu:trusty
+FROM centos:centos7
 MAINTAINER Jay Kline <jay@slushpupie.com>
 
 # Make sure the package repository is up to date.
-RUN apt-get update ; apt-get -y upgrade ; apt-get install -y openssh-server openjdk-7-jdk pylint curl
+RUN yum install -y openssh-server java-1.8.0-openjdk git curl rpm-build rpmdevtools
 
 # Configure SSH server
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
