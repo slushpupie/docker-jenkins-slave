@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:centos6
 MAINTAINER Jay Kline <jay@slushpupie.com>
 
 # Make sure the package repository is up to date.
